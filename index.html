@@ -87,26 +87,9 @@
       100% { transform: scale(0.99); opacity:.60; }
     }
 
-    /* Un petit grain/cinéma optionnel */
-    .grain{
-      position:absolute;
-      inset:-20%;
-      z-index:3;
-      pointer-events:none;
-      opacity:.08;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-      animation: grainMove 6s steps(10) infinite;
-      mix-blend-mode: overlay;
-    }
-    @keyframes grainMove{
-      0% { transform: translate3d(0,0,0); }
-      100% { transform: translate3d(-6%, 4%, 0); }
-    }
-
     /* Accessibilité: si l’utilisateur préfère moins d’animations */
     @media (prefers-reduced-motion: reduce){
-      .title::before, .title::after, .grain{
+      .title::before, .title::after{
         animation:none !important;
       }
     }
@@ -115,7 +98,6 @@
 <body>
   <section class="hero">
     <h1 class="title">X-TOPIA</h1>
-    <div class="grain"></div>
   </section>
 </body>
 </html>
