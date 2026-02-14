@@ -29,49 +29,6 @@
       isolation:isolate; /* important pour les layers */
     }
 
-    /* BRUME (2 couches) */
-    .fog{
-      position:absolute;
-      inset:-60px -80px;
-      z-index:0;
-      pointer-events:none;
-      filter: blur(18px) contrast(120%);
-      opacity:.55;
-      mix-blend-mode: screen;
-      background:
-        radial-gradient(closest-side at 20% 30%, rgba(168,85,247,.22), transparent 65%),
-        radial-gradient(closest-side at 80% 40%, rgba(255,255,255,.10), transparent 70%),
-        radial-gradient(closest-side at 55% 75%, rgba(168,85,247,.18), transparent 70%),
-        radial-gradient(closest-side at 35% 60%, rgba(0,0,0,.20), transparent 70%);
-      animation: fogDrift 9s ease-in-out infinite alternate;
-    }
-    .fog::before,
-    .fog::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(closest-side at 30% 55%, rgba(168,85,247,.18), transparent 70%),
-        radial-gradient(closest-side at 70% 50%, rgba(0,0,0,.25), transparent 70%);
-      transform: translateX(-6%);
-      opacity:.75;
-      animation: fogDrift2 13s ease-in-out infinite alternate;
-    }
-    .fog::after{
-      transform: translateX(8%);
-      opacity:.55;
-      animation-duration: 17s;
-    }
-
-    @keyframes fogDrift{
-      from { transform: translate3d(-2%, -1%, 0) scale(1.02); }
-      to   { transform: translate3d( 3%,  2%, 0) scale(1.06); }
-    }
-    @keyframes fogDrift2{
-      from { transform: translate3d(-3%, 0%, 0) scale(1.03); }
-      to   { transform: translate3d( 4%, 1%, 0) scale(1.08); }
-    }
-
     /* TITRE */
     .title{
       position:relative;
@@ -149,7 +106,7 @@
 
     /* Accessibilité: si l’utilisateur préfère moins d’animations */
     @media (prefers-reduced-motion: reduce){
-      .fog, .fog::before, .fog::after, .title::before, .title::after, .grain{
+      .title::before, .title::after, .grain{
         animation:none !important;
       }
     }
@@ -157,7 +114,6 @@
 </head>
 <body>
   <section class="hero">
-    <div class="fog"></div>
     <h1 class="title">X-TOPIA</h1>
     <div class="grain"></div>
   </section>
