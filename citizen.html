@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Citizen Protocol | X-Topia</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: #000000;
+      color: #e9e9ef;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      box-sizing: border-box;
+    }
+
+    .notice {
+      width: min(920px, 100%);
+      line-height: 1.55;
+      font-size: clamp(18px, 2vw, 24px);
+      transform: translateY(-44px);
+    }
+
+    .notice p {
+      margin: 0 0 1.1rem 0;
+    }
+
+    .alert-line {
+      color: #ff4d4d;
+    }
+
+    .signature-wrap {
+      margin: 1.7rem 0 0.85rem 0;
+    }
+
+    .signature-image {
+      display: block;
+      width: min(155px, 100%);
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: screen;
+      filter: contrast(2.2);
+    }
+
+    .signature-title {
+      margin: 0;
+      font-size: clamp(16px, 1.7vw, 20px);
+    }
+
+    .citizen-access {
+      position: fixed;
+      right: 24px;
+      bottom: 20px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: clamp(13px, 1.2vw, 18px);
+      font-family: "Orbitron", "Bahnschrift", "Consolas", "Segoe UI", monospace;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: pulseCitizen 3.2s ease-in-out infinite alternate;
+    }
+
+    .citizen-access:focus-visible {
+      outline: 1px solid rgba(255, 255, 255, 0.75);
+      outline-offset: 6px;
+    }
+
+    @keyframes pulseCitizen {
+      0% {
+        color: #050505;
+        text-shadow: 0 0 0 rgba(168, 85, 247, 0);
+      }
+      100% {
+        color: #c58cff;
+        text-shadow:
+          0 0 6px rgba(168, 85, 247, 0.9),
+          0 0 16px rgba(168, 85, 247, 0.55);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .citizen-access {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="notice">
+    <p class="alert-line">The Citizen Protocol is not currently accepting applications.</p>
+    <br />
+    <p>Citizenship granted by invitation.</p>
+    <br />
+    <p>We appreciate your interest in X-Topia.</p>
+    <br />
+    <br />
+
+    <div class="signature-wrap" aria-label="Signature">
+      <img class="signature-image" src="images/signature sister jessica.png" alt="Sister Jessica signature" />
+    </div>
+
+    <p class="signature-title">Sister Jessica<br />High Commissioner of Entry<br />X-Topia</p>
+  </main>
+  <a class="citizen-access" href="citizen.html">CITIZEN ACCESS</a>
+</body>
+</html>
