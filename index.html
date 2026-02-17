@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>X-Topia</title>
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap");
+
     :root {
+      --font-official: "Exo 2", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       --subtitle-top: calc(56.9% + 50px);
       --subtitle-left: 66.2%;
       --subtitle-size: 15px;
@@ -25,6 +28,7 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      font-family: var(--font-official);
     }
 
     .entry-actions {
@@ -45,7 +49,7 @@
       cursor: pointer;
       text-decoration: none;
       font-size: clamp(14px, 1.6vw, 22px);
-      font-family: "Orbitron", "Bahnschrift", "Consolas", "Segoe UI", monospace;
+      font-family: inherit;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;

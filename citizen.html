@@ -5,41 +5,147 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Citizen Protocol | X-Topia</title>
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px;
-      background: #000000;
-      color: #e9e9ef;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap");
+
+    :root {
+      --font-official: "Exo 2", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --bg: #050608;
+      --panel: #0b0f14;
+      --line: #1e2a3a;
+      --text: #e8edf5;
+      --muted: #8da0b7;
+      --alert: #ef4f63;
+      --cyber: #57d9ff;
+      --accent: #ffb066;
+    }
+
+    * {
       box-sizing: border-box;
     }
 
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 28px 96px;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(87, 217, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 18% 88%, rgba(239, 79, 99, 0.06), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font-official);
+    }
+
+    .dept-logo {
+      position: fixed;
+      top: 16px;
+      left: 18px;
+      width: min(360px, 57vw);
+      height: auto;
+      object-fit: contain;
+      opacity: 0.95;
+    }
+
     .notice {
-      width: min(920px, 100%);
-      line-height: 1.55;
-      font-size: clamp(18px, 2vw, 24px);
-      transform: translateY(-44px);
+      width: min(980px, 100%);
+      margin: 78px auto 0;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.9), rgba(8, 11, 16, 0.92));
+      box-shadow:
+        0 24px 50px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(87, 217, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .doc-title {
+      margin: 0;
+      font-size: clamp(19px, 2.2vw, 28px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .doc-subtitle {
+      margin: 7px 0 0 0;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.45;
+    }
+
+    .doc-body {
+      padding: 22px;
+    }
+
+    .status-line {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 0 18px 0;
+    }
+
+    .status-chip {
+      border: 1px solid rgba(239, 79, 99, 0.65);
+      color: var(--alert);
+      background: rgba(239, 79, 99, 0.08);
+      padding: 5px 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .status-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.03em;
     }
 
     .notice p {
-      margin: 0 0 1.1rem 0;
+      margin: 0 0 18px 0;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.5;
+      max-width: 820px;
     }
 
     .alert-line {
-      color: #ff4d4d;
+      color: var(--alert);
+      font-weight: 700;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 26px 0 18px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
     }
 
     .signature-wrap {
-      margin: 1.7rem 0 0.85rem 0;
+      margin: 8px 0 6px;
     }
 
     .signature-image {
       display: block;
-      width: min(155px, 100%);
+      width: min(220px, 36vw);
       height: auto;
       object-fit: contain;
       mix-blend-mode: screen;
@@ -48,68 +154,140 @@
 
     .signature-title {
       margin: 0;
-      font-size: clamp(16px, 1.7vw, 20px);
+      color: var(--muted);
+      line-height: 1.4;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
     }
 
     .citizen-access {
-      position: fixed;
-      right: 24px;
-      bottom: 20px;
-      border: 0;
-      background: transparent;
-      padding: 0;
+      border: 1px solid rgba(87, 217, 255, 0.45);
+      border-radius: 999px;
+      background: rgba(87, 217, 255, 0.08);
+      padding: 10px 17px;
       margin: 0;
       text-decoration: none;
       cursor: pointer;
-      font-size: clamp(13px, 1.2vw, 18px);
-      font-family: "Orbitron", "Bahnschrift", "Consolas", "Segoe UI", monospace;
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-family: inherit;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      animation: pulseCitizen 3.2s ease-in-out infinite alternate;
+      color: var(--cyber);
+      box-shadow:
+        0 0 10px rgba(87, 217, 255, 0.16),
+        inset 0 0 8px rgba(87, 217, 255, 0.11);
     }
 
-    .citizen-access:focus-visible {
+    .citizen-access:focus-visible,
+    .frontier-gate:focus-visible {
       outline: 1px solid rgba(255, 255, 255, 0.75);
       outline-offset: 6px;
     }
 
-    @keyframes pulseCitizen {
-      0% {
-        color: #050505;
-        text-shadow: 0 0 0 rgba(168, 85, 247, 0);
-      }
-      100% {
-        color: #c58cff;
-        text-shadow:
-          0 0 6px rgba(168, 85, 247, 0.9),
-          0 0 16px rgba(168, 85, 247, 0.55);
-      }
+    .frontier-gate {
+      text-decoration: none;
+      cursor: pointer;
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-family: inherit;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid rgba(255, 176, 102, 0.55);
+      padding-bottom: 3px;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .citizen-access {
-        animation: none;
+    .footnote {
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      line-height: 1.45;
+      opacity: 0.88;
+      transform: translateY(30px) scale(0.5);
+      transform-origin: top left;
+      width: 200%;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 22px 14px 70px;
+      }
+
+      .notice {
+        margin-top: 94px;
+      }
+
+      .doc-header,
+      .doc-body {
+        padding: 16px;
+      }
+
+      .meta {
+        text-align: left;
+      }
+
+      .dept-logo {
+        width: min(250px, 62vw);
       }
     }
   </style>
 </head>
 <body>
+  <img class="dept-logo" src="images/logo dept immigration.png" alt="Department of Immigration logo" />
   <main class="notice">
-    <p class="alert-line">The Citizen Protocol is not currently accepting applications.</p>
-    <br />
-    <p>Citizenship granted by invitation.</p>
-    <br />
-    <p>We appreciate your interest in X-Topia.</p>
-    <br />
-    <br />
+    <header class="doc-header">
+      <div>
+        <h1 class="doc-title">Department of Immigration</h1>
+        <p class="doc-subtitle">Citizen Protocol Office | X-Topia Central Authority</p>
+      </div>
+      <div class="meta">
+        FILE: IMM-XT-77-130A<br />
+        CLASSIFICATION: RESTRICTED<br />
+        STATUS: INVITATION ONLY
+      </div>
+    </header>
 
-    <div class="signature-wrap" aria-label="Signature">
-      <img class="signature-image" src="images/signature sister jessica.png" alt="Sister Jessica signature" />
-    </div>
+    <section class="doc-body">
+      <div class="status-line">
+        <span class="status-chip">Protocol Lock Active</span>
+        <p class="status-note">Unauthorized enrollment channels remain offline.</p>
+      </div>
 
-    <p class="signature-title">Sister Jessica<br />High Commissioner of Entry<br />X-Topia</p>
+      <p class="alert-line">The Citizen Protocol is not currently accepting applications.</p>
+      <p>Citizenship granted by invitation.</p>
+      <p>We appreciate your interest in X-Topia.</p>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="signature-wrap" aria-label="Signature">
+        <img class="signature-image" src="images/signature sister jessica.png" alt="Sister Jessica signature" />
+      </div>
+
+      <p class="signature-title">Sister Jessica<br />High Commissioner of Entry</p>
+
+      <div class="actions">
+        <a class="citizen-access" href="citizen.html">Citizen Access</a>
+        <a class="frontier-gate" href="index.html">Back To The Frontier Gate</a>
+      </div>
+
+      <p class="footnote">
+        This notice is generated by Civic Operations Node 04.<br />
+        Any invitation issued outside authenticated channels is invalid.
+      </p>
+    </section>
   </main>
-  <a class="citizen-access" href="citizen.html">CITIZEN ACCESS</a>
 </body>
 </html>
