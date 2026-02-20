@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -93,6 +93,31 @@
       margin-bottom: 0;
     }
 
+    .logo-link {
+      display: block;
+      margin: 0 0 10px;
+      text-decoration: none;
+    }
+
+    .logo-link .logo {
+      margin: 0;
+    }
+
+    .logo-link:last-child {
+      margin-bottom: 0;
+    }
+
+    .logo-link:focus-visible {
+      outline: 1px solid rgba(255, 255, 255, 0.75);
+      outline-offset: 6px;
+      border-radius: 10px;
+    }
+
+    .logo-link.is-active .logo {
+      border-color: rgba(102, 200, 255, 0.8);
+      box-shadow: 0 0 0 1px rgba(102, 200, 255, 0.5);
+    }
+
     .card {
       border: 1px solid var(--line);
       border-radius: 14px;
@@ -101,28 +126,29 @@
       overflow: hidden;
     }
 
-    .head {
-      padding: 20px 22px;
-      border-bottom: 1px solid var(--line);
+    .body {
+      width: min(980px, calc(100% - 44px));
+      margin: 22px auto;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.96), rgba(9, 13, 19, 0.98));
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
     }
 
     h1 {
-      margin: 0;
+      margin: 0 0 8px;
       font-size: clamp(20px, 2.4vw, 30px);
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .sub {
-      margin: 8px 0 0;
+      margin: 0 0 18px;
       color: var(--muted);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-    }
-
-    .body {
-      padding: 22px;
     }
 
     .body p {
@@ -156,6 +182,24 @@
       outline-offset: 6px;
     }
 
+    .viewer {
+      display: none;
+      padding: 0;
+      min-height: 72vh;
+    }
+
+    .viewer.is-open {
+      display: block;
+    }
+
+    .viewer-frame {
+      width: 100%;
+      min-height: 72vh;
+      border: 0;
+      display: block;
+      background: #ffffff;
+    }
+
     @media (max-width: 920px) {
       .layout {
         grid-template-columns: 1fr;
@@ -173,6 +217,11 @@
       .logo {
         margin: 0;
       }
+
+      .body {
+        width: calc(100% - 24px);
+        margin: 12px;
+      }
     }
 
     @media (max-width: 560px) {
@@ -186,21 +235,31 @@
   <div class="wrap">
     <div class="layout">
       <aside class="logos" aria-label="X-Topia Department Logos">
-        <img class="logo" src="images/logo gouv x-topia.png" alt="X-Topia government logo" />
-        <img class="logo" src="images/logo natality dept.png" alt="Natality Department logo" />
-        <img class="logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
-        <img class="logo" src="images/logo dept of engineering.png" alt="Department of Engineering logo" />
-        <img class="logo" src="images/logo economy dept.png" alt="Economy Department logo" />
-        <img class="logo" src="images/logo defense authority.png" alt="Defense Authority logo" />
+        <a class="logo-link is-active" href="#declaration" data-view="declaration">
+          <img class="logo" src="images/logo gouv x-topia.png" alt="X-Topia government logo" />
+        </a>
+        <a class="logo-link" href="natality.html">
+          <img class="logo" src="images/logo natality dept.png" alt="Natality Department logo" />
+        </a>
+        <a class="logo-link" href="immigration.html">
+          <img class="logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
+        </a>
+        <a class="logo-link" href="engineering.html">
+          <img class="logo" src="images/logo dept of engineering.png" alt="Department of Engineering logo" />
+        </a>
+        <a class="logo-link" href="economy.html">
+          <img class="logo" src="images/logo economy dept.png" alt="Economy Department logo" />
+        </a>
+        <a class="logo-link" href="defense.html">
+          <img class="logo" src="images/logo defense authority.png" alt="Defense Authority logo" />
+        </a>
       </aside>
 
       <main class="card">
-        <header class="head">
+        <section class="body">
           <h1>Declaration of X-Topia</h1>
           <p class="sub">Official Visitor Document</p>
-        </header>
 
-        <section class="body">
           <p>X-Topia is a sovereign city-nation, independent from all external authority. Its legitimacy rests upon an act of exile and foundation carried out by the Five Founding Sisters, whose departure from the old world marked the birth of a new civil order.</p>
           <p>From that founding act emerged a nation structured not by accident, but by deliberate design. At the core of X-Topia stands the enduring symbol of Five. The Five Founding Sisters form the original nucleus of the political order, and their number shapes the very geometry of the city.</p>
           <p>Five circular districts compose the territorial structure, arranged according to the pattern of the Five. Each district maintains autonomous local administration while remaining aligned under a central authority that preserves national equilibrium.</p>
@@ -221,8 +280,106 @@
             <a class="back" href="index.html">Back To The Frontier Gate</a>
           </div>
         </section>
+
+        <section class="viewer" id="viewer" aria-live="polite">
+          <iframe
+            id="contentFrame"
+            class="viewer-frame"
+            title="Visitor linked page"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            scrolling="no"
+          ></iframe>
+        </section>
       </main>
     </div>
   </div>
+  <script>
+    (function () {
+      const logoLinks = document.querySelectorAll(".logo-link[href]");
+      const body = document.querySelector(".body");
+      const viewer = document.getElementById("viewer");
+      const frame = document.getElementById("contentFrame");
+
+      if (!logoLinks.length || !body || !viewer || !frame) {
+        return;
+      }
+
+      function openInViewer(link) {
+        const href = link.getAttribute("href");
+        if (!href) return;
+
+        frame.src = href;
+        body.style.display = "none";
+        viewer.classList.add("is-open");
+
+        logoLinks.forEach((item) => item.classList.remove("is-active"));
+        link.classList.add("is-active");
+      }
+
+      function resizeFrameToContent(retries = 8) {
+        try {
+          const doc = frame.contentDocument || frame.contentWindow.document;
+          if (!doc) return;
+          const bodyEl = doc.body;
+          const htmlEl = doc.documentElement;
+          const height = Math.max(
+            bodyEl ? bodyEl.scrollHeight : 0,
+            bodyEl ? bodyEl.offsetHeight : 0,
+            bodyEl ? bodyEl.clientHeight : 0,
+            htmlEl ? htmlEl.scrollHeight : 0,
+            htmlEl ? htmlEl.offsetHeight : 0,
+            htmlEl ? htmlEl.clientHeight : 0
+          );
+          if (height > 0) {
+            frame.style.height = `${height}px`;
+          }
+        } catch (error) {
+          // Ignore cross-origin access failures.
+        }
+
+        if (retries > 0) {
+          window.setTimeout(() => resizeFrameToContent(retries - 1), 150);
+        }
+      }
+
+      function showDeclaration() {
+        frame.removeAttribute("src");
+        viewer.classList.remove("is-open");
+        body.style.display = "";
+        logoLinks.forEach((item) => item.classList.remove("is-active"));
+      }
+
+      logoLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (link.dataset.view === "declaration") {
+            showDeclaration();
+            link.classList.add("is-active");
+            return;
+          }
+          openInViewer(link);
+        });
+      });
+
+      frame.addEventListener("load", () => resizeFrameToContent());
+      window.addEventListener("resize", () => resizeFrameToContent(2));
+      window.addEventListener("message", (event) => {
+        if (event.source !== frame.contentWindow) {
+          return;
+        }
+
+        const data = event.data;
+        if (!data || data.type !== "xtopia-frame-height") {
+          return;
+        }
+
+        const height = Number(data.height);
+        if (Number.isFinite(height) && height > 0) {
+          frame.style.height = `${Math.ceil(height)}px`;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
