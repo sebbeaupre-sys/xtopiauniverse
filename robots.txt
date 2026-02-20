@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sebbeaupre-sys.github.io/xtopiauniverse/sitemap.xml
