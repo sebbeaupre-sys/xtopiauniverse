@@ -28,7 +28,7 @@ jobs:
           cp sitemap.xml public/ 2>/dev/null || true
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: public
 
