@@ -1,0 +1,36 @@
+name: Deploy pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build artifact
+        run: |
+          mkdir -p public
+          rsync -av --exclude '.git' --exclude '.github' --exclude 'documents' --exclude '*.docx' --exclude 'Instructions.txt' --exclude 'README.md' --exclude 'scripts' --exclude '*.yml' --exclude '*.yaml' --exclude '.github' --exclude 'LICENSE' --exclude 'package-lock.json' --exclude 'package.json' ./ public
+          cp robots.txt public/ 2>/dev/null || true
+          cp sitemap.xml public/ 2>/dev/null || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
