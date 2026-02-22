@@ -36,12 +36,19 @@
     }
 
     .dept-logo {
-      display: block;
-      width: min(360px, 57vw);
+      display: inline-block;
+      width: min(320px, 52vw);
+      max-width: 100%;
       height: auto;
       object-fit: contain;
       opacity: 0.95;
-      margin: 0 0 14px 6px;
+    }
+
+    .notice-logo {
+      padding: 22px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
     }
 
     .notice {
@@ -243,10 +250,12 @@
       }
     }
   </style>
-</head>
+ </head>
 <body>
-  <img class="dept-logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
   <main class="notice">
+    <div class="notice-logo">
+      <img class="dept-logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
+    </div>
     <header class="doc-header">
       <div>
         <h1 class="doc-title">Department of Immigration</h1>

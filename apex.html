@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Apex | X-Topia</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap");
+
+    :root {
+      --font-official: "Exo 2", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --bg: #06080b;
+      --panel: #0d1219;
+      --line: #203041;
+      --text: #e9eef6;
+      --muted: #8ea2ba;
+      --accent: #66c8ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 28px 16px 72px;
+      color: var(--text);
+      font-family: var(--font-official);
+      background:
+        radial-gradient(circle at 85% 10%, rgba(102, 200, 255, 0.12), transparent 30%),
+        radial-gradient(circle at 15% 90%, rgba(102, 200, 255, 0.08), transparent 36%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(1220px, 100%);
+      margin: 0 auto;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.94), rgba(9, 13, 19, 0.96));
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+      padding: 22px;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .article {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.96), rgba(9, 13, 19, 0.98));
+      padding: 22px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: #66c8ff #b9c3cf;
+    }
+
+    .article::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    .article::-webkit-scrollbar-track {
+      background: linear-gradient(180deg, #d3dae3, #aeb9c7);
+      border-radius: 10px;
+    }
+
+    .article::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #2f6f99, #1c4f72);
+      border: 2px solid #c8d1dc;
+      border-radius: 10px;
+    }
+
+    .article::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #3a7ea8, #245f87);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(22px, 2.8vw, 34px);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .article p {
+      margin: 0 0 16px;
+      line-height: 1.68;
+      color: var(--text);
+      font-size: clamp(15px, 1.5vw, 18px);
+    }
+
+    .side-links {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.9), rgba(9, 13, 19, 0.94));
+      padding: 14px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .side-title {
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .link-slot {
+      display: block;
+      padding: 12px 10px;
+      margin: 0 0 10px;
+      border: 1px solid rgba(142, 162, 186, 0.35);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.02);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .link-slot:last-child { margin-bottom: 0; }
+
+    .link-slot:hover {
+      border-color: rgba(102, 200, 255, 0.8);
+      box-shadow: 0 0 0 1px rgba(102, 200, 255, 0.35) inset;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #ffb066;
+      border-bottom: 1px solid rgba(255, 176, 102, 0.55);
+      padding-bottom: 3px;
+    }
+
+    @media (max-width: 920px) {
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .article {
+        max-height: none;
+        overflow: visible;
+      }
+
+      .side-links {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <div class="content-layout">
+        <article class="article">
+          <h1>The Apex</h1>
+          <p class="sub">The Heart Of X-Topia</p>
+
+          <p>At the precise center of X-Topia rises The Apex: the geometric, cultural, and symbolic heart of the city.</p>
+          <p>From every district, the Tower of the Five Sisters is visible. Its antenna ascends to 1,256 meters, defining the skyline with quiet authority. By day it reflects the clarity of the sky; by night its luminous crown forms a constant halo above the city. The tower is both administrative and ceremonial, a place where direction is shaped and vision is refined. It is not hidden, nor distant. It stands openly at the center of everything.</p>
+          <p>Beneath its soaring structure lies an unexpected contrast: a vast recreational park of extraordinary scale. Reflective basins, botanical gardens, shaded promenades, and carefully curated landscapes create a serene foundation below monumental steel. The vertical and the natural coexist in deliberate balance. Power above. Harmony below.</p>
+          <p>Encircling the tower stretches a vibrant and meticulously maintained urban district. Elegant residential buildings, refined commercial spaces, cultural venues, and public plazas define a city that is both structured and alive. The streets are clean, the infrastructure seamless, the atmosphere dynamic. The Apex does not feel rigid; it feels intentional.</p>
+          <p>This is the district for those who thrive in movement. Those who seek the energy of a great city. Those who prefer proximity to decision, activity, and constant evolution. Wealth does not define The Apex. Temperament does.</p>
+          <p>Any permanent resident of X-Topia may choose to live here. It is not reserved, nor exclusive. Yet not everyone desires it. The Apex rewards those who embrace intensity, structure, and rhythm.</p>
+          <p>Security is present but unobtrusive. Unlike The Citadel, where defense is visible and strategic, protection in The Apex is integrated quietly into the environment. Order here does not need to announce itself.</p>
+          <p>The Apex represents elevation, not above the people, but at the center of them. It is the place where vision becomes direction, where structure supports vitality, and where urban life reaches its highest expression.</p>
+        </article>
+
+        <aside class="side-links" aria-label="The Apex links">
+          <p class="side-title">Links</p>
+          <a class="link-slot" href="#">Pictures</a>
+          <a class="link-slot" href="#">Places of interest</a>
+          <a class="link-slot" href="#">Sister in charge</a>
+          <a class="back" href="visitor.html">Back To Visitor Page</a>
+        </aside>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
