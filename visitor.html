@@ -32,49 +32,163 @@
         var(--bg);
     }
 
-    .wrap {
-      width: min(1220px, 100%);
-      margin: 0 auto;
-    }
-
-    .layout {
+    .page-layout {
       display: grid;
-      grid-template-columns: minmax(190px, 250px) 1fr minmax(190px, 250px);
-      gap: 16px;
-      align-items: start;
+      grid-template-columns: 1fr;
+      width: 100%;
+      min-height: 100vh;
+      gap: 24px;
     }
 
-    .logos {
+    .content-row {
+      display: grid;
+      grid-template-columns: 1.53fr 1fr;
+      gap: 24px;
+      width: 100%;
+      align-items: stretch;
+      height: calc(100vh - 260px);
+      min-height: calc(100vh - 260px);
+      max-height: calc(100vh - 260px);
+      margin-top: -20px;
+    }
+
+    .content-row .wrap {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding-right: 0;
+      height: 100%;
+    }
+
+    .right-space {
+      width: 100%;
+      margin-top: 0;
+      overflow-y: auto;
+      height: 100%;
+      max-height: 100%;
+      min-height: 0;
       border: 1px solid var(--line);
       border-radius: 14px;
-      background: linear-gradient(180deg, rgba(14, 19, 27, 0.9), rgba(9, 13, 19, 0.94));
-      padding: 14px;
-      position: sticky;
-      top: 16px;
-      max-height: calc(100vh - 32px);
-      overflow-y: auto;
-      scrollbar-gutter: stable;
-      scrollbar-width: thin;
-      scrollbar-color: #66c8ff #b9c3cf;
+      box-shadow: inset 0 -1px 0 rgba(255,255,255,0.04);
     }
 
-    .logos::-webkit-scrollbar {
-      width: 12px;
+    .header-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(0, auto);
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+      padding: 12px 0;
+      margin-top: -20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: visible;
     }
 
-    .logos::-webkit-scrollbar-track {
-      background: linear-gradient(180deg, #d3dae3, #aeb9c7);
+    .header-row > * {
+      justify-self: center;
+    }
+
+    .top-banner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex: 0 0 auto;
+      width: auto;
+      min-width: 0;
+      height: 100%;
+      margin: 0;
+    }
+
+    .top-banner img {
+      display: block;
+      width: 240px;
+      max-height: 48%;
+      object-fit: contain;
+      max-width: 100%;
       border-radius: 10px;
+      border: none;
+      background: transparent;
+      padding: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
-    .logos::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #2f6f99, #1c4f72);
-      border: 2px solid #c8d1dc;
+    .top-banner img:hover {
+      border: 1px solid rgba(195, 123, 255, 0.9);
+      box-shadow: 0 0 18px rgba(195, 123, 255, 0.65), inset 0 0 14px rgba(195, 123, 255, 0.35);
+    }
+
+    .logo-link {
+      display: inline-flex;
+      flex: 0 0 auto;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      overflow: visible;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border: 1px solid rgba(142, 162, 186, 0.22);
       border-radius: 10px;
+      background: rgba(255, 255, 255, 0.01);
+      padding: 10px;
+      transition: transform 0.2s ease;
+      transform-origin: top center;
+      overflow: visible;
     }
 
-    .logos::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #3a7ea8, #245f87);
+    .logo-link:hover .logo {
+      transform: scale(2);
+      z-index: 10;
+    }
+
+    .logo-link.is-active .logo {
+      border-color: rgba(102, 200, 255, 0.8);
+      box-shadow: 0 0 0 1px rgba(102, 200, 255, 0.5);
+    }
+
+    .map-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: stretch;
+      height: 100%;
+    }
+
+    .map-panel {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.94), rgba(9, 13, 19, 0.96));
+      overflow: hidden;
+    }
+
+    .map-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .card {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(14, 19, 27, 0.94), rgba(9, 13, 19, 0.96));
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    .card.is-open {
+      display: block;
     }
 
     .logo {
@@ -82,29 +196,8 @@
       width: 100%;
       height: auto;
       object-fit: contain;
-      border: 1px solid rgba(142, 162, 186, 0.22);
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.01);
-      padding: 8px;
-      margin: 0 0 10px;
-    }
-
-    .logo:last-child {
-      margin-bottom: 0;
-    }
-
-    .logo-link {
-      display: block;
-      margin: 0 0 10px;
-      text-decoration: none;
-    }
-
-    .logo-link .logo {
-      margin: 0;
-    }
-
-    .logo-link:last-child {
-      margin-bottom: 0;
     }
 
     .logo-link:focus-visible {
@@ -113,20 +206,26 @@
       border-radius: 10px;
     }
 
-    .logo-link.is-active .logo {
-      border-color: rgba(102, 200, 255, 0.8);
-      box-shadow: 0 0 0 1px rgba(102, 200, 255, 0.5);
+    @media (max-width: 920px) {
+      .header-row {
+        justify-content: center;
+      }
+
+      .map-row {
+        grid-template-columns: 1fr;
+      }
+
+      .map-empty {
+        display: none;
+      }
+
+      .body {
+        width: calc(100% - 24px);
+        margin: 12px;
+      }
     }
 
-    .card {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(14, 19, 27, 0.94), rgba(9, 13, 19, 0.96));
-      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
-      overflow: hidden;
-    }
-
-    .body {
+.body {
       width: min(980px, calc(100% - 44px));
       margin: 22px auto;
       padding: 22px;
@@ -156,70 +255,6 @@
       line-height: 1.65;
       color: var(--text);
       font-size: clamp(15px, 1.6vw, 18px);
-    }
-
-    .district-panel {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(14, 19, 27, 0.9), rgba(9, 13, 19, 0.94));
-      padding: 14px;
-      position: sticky;
-      top: 16px;
-      max-height: calc(100vh - 32px);
-      overflow-y: auto;
-      scrollbar-gutter: stable;
-      scrollbar-width: thin;
-      scrollbar-color: #66c8ff #b9c3cf;
-    }
-
-    .district-panel::-webkit-scrollbar {
-      width: 12px;
-    }
-
-    .district-panel::-webkit-scrollbar-track {
-      background: linear-gradient(180deg, #d3dae3, #aeb9c7);
-      border-radius: 10px;
-    }
-
-    .district-panel::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #2f6f99, #1c4f72);
-      border: 2px solid #c8d1dc;
-      border-radius: 10px;
-    }
-
-    .district-panel::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(180deg, #3a7ea8, #245f87);
-    }
-
-    .district-links {
-      display: grid;
-      gap: 10px;
-    }
-
-    .district-link {
-      display: block;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(142, 162, 186, 0.35);
-      background: rgba(255, 255, 255, 0.02);
-      transition: border-color 120ms ease, transform 120ms ease;
-    }
-
-    .district-link:hover {
-      border-color: rgba(102, 200, 255, 0.8);
-      transform: translateY(-1px);
-    }
-
-    .district-link:focus-visible {
-      outline: 1px solid rgba(255, 255, 255, 0.75);
-      outline-offset: 4px;
-    }
-
-    .district-thumb {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
     }
 
     .actions {
@@ -269,156 +304,139 @@
     }
 
     @media (max-width: 920px) {
-      .layout {
+      .header-row {
+        justify-content: center;
+      }
+
+      .map-row {
         grid-template-columns: 1fr;
       }
 
-      .logos {
-        position: static;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        max-height: none;
-        overflow: visible;
-      }
-
-      .logo {
-        margin: 0;
+      .map-empty {
+        display: none;
       }
 
       .body {
         width: calc(100% - 24px);
         margin: 12px;
       }
-
-      .district-panel {
-        position: static;
-        max-height: none;
-        overflow: visible;
-      }
-
-      .district-links {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
     @media (max-width: 560px) {
-      .logos {
-        grid-template-columns: 1fr;
-      }
-
-      .district-links {
-        grid-template-columns: 1fr;
+      .header-row {
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="layout">
-      <aside class="logos" aria-label="X-Topia Department Logos">
-        <a class="logo-link" href="#declaration" data-view="declaration">
-          <img class="logo" src="images/logo gouv x-topia.png" alt="X-Topia government logo" />
-        </a>
-        <a class="logo-link" href="natality.html">
-          <img class="logo" src="images/logo natality dept.png" alt="Natality Department logo" />
-        </a>
-        <a class="logo-link" href="immigration.html">
-          <img class="logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
-        </a>
-        <a class="logo-link" href="engineering.html">
-          <img class="logo" src="images/logo dept of engineering.png" alt="Department of Engineering logo" />
-        </a>
-        <a class="logo-link" href="economy.html">
-          <img class="logo" src="images/logo economy dept.png" alt="Economy Department logo" />
-        </a>
-        <a class="logo-link" href="defense.html">
-          <img class="logo" src="images/logo defense authority.png" alt="Defense Authority logo" />
-        </a>
-      </aside>
+  <div class="page-layout">
+    <div class="header-row" aria-label="X-Topia Department Logos">
+      <div class="top-banner">
+          <img class="logo" src="images/welcome_banner'1l.png" alt="Welcome to X-Topia" />
+          <a class="banner-link" href="index.html">
+            <img class="logo" src="images/Back to frontier gate.png" alt="Back to Frontier Gate" />
+          </a>
+        </div>
 
+      <a class="logo-link" href="#declaration" data-view="declaration">
+            <img class="logo" src="images/logo gouv x-topia.png" alt="X-Topia government logo" />
+          </a>
+          <a class="logo-link" href="natality.html">
+            <img class="logo" src="images/logo natality dept.png" alt="Natality Department logo" />
+          </a>
+          <a class="logo-link" href="immigration.html">
+            <img class="logo" src="images/logo dept immigration.png?v=20260220" alt="Department of Immigration logo" />
+          </a>
+          <a class="logo-link" href="engineering.html">
+            <img class="logo" src="images/logo dept of engineering.png" alt="Department of Engineering logo" />
+          </a>
+          <a class="logo-link" href="economy.html">
+            <img class="logo" src="images/logo economy dept.png" alt="Economy Department logo" />
+          </a>
+          <a class="logo-link" href="defense.html">
+            <img class="logo" src="images/logo defense authority.png" alt="Defense Authority logo" />
+          </a>
+    </div>
+    <div class="content-row">
+      <div class="wrap">
+        <div class="map-row">
+          <div class="map-panel">
+            <img class="map-image" src="images/mape_xtopia.png" alt="X-Topia map" />
+          </div>
+        </div>
+      </div>
+
+      <div class="right-space" aria-hidden="false">
       <main class="card">
         <section class="body">
           <div class="initial-empty" id="initialEmpty"></div>
           <div class="declaration-content" id="declarationContent" hidden>
-            <h1>Declaration of X-Topia</h1>
-            <p class="sub">Official Visitor Document</p>
+          <h1>Declaration of X-Topia</h1>
+          <p class="sub">Official Visitor Document</p>
 
-            <p>X-Topia is a sovereign city-nation, independent from all external authority. Its legitimacy rests upon an act of exile and foundation carried out by the Five Founding Sisters, whose departure from the old world marked the birth of a new civil order.</p>
-            <p>From that founding act emerged a nation structured not by accident, but by deliberate design. At the core of X-Topia stands the enduring symbol of Five. The Five Founding Sisters form the original nucleus of the political order, and their number shapes the very geometry of the city.</p>
-            <p>Five circular districts compose the territorial structure, arranged according to the pattern of the Five. Each district maintains autonomous local administration while remaining aligned under a central authority that preserves national equilibrium.</p>
-            <p>Full citizenship in X-Topia is reserved exclusively for women. Citizenship confers civic rights, political participation, access to resources, and full protection by the State. The city was conceived as a space of female sovereignty, and that principle remains immutable.</p>
-            <p>The economy of X-Topia is designed around quality of life rather than productivity for its own sake. Citizen labor is limited. Automation and robotics perform the majority of industrial and logistical functions. Leisure time is not a luxury but a structural pillar of social balance.</p>
-            <p>The rhythm of life is measured, intentional, and protected. Public surface life is governed by principles of calm, cleanliness, safety, and aesthetic harmony. The visible city reflects internal order. Laws regulate any action that threatens stability or collective coherence.</p>
-            <p>Within this structure, one district is designated as a zone of extended bodily expression, including the freedom of public nudity. The remaining districts maintain clothing standards defined by their local councils. This differentiation reflects a broader philosophy: liberty exists within clearly defined boundaries.</p>
-            <p>X-Topia formally acknowledges the existence of an underground cultural sphere. Social experimentation, private gatherings, and regulated substance use may occur within controlled frameworks. Such parallel expressions are tolerated so long as they do not endanger institutional stability or collective security.</p>
-            <p>Technological systems related to reproduction and biological management are the exclusive property of the State. They are administered solely to ensure demographic continuity and long-term sustainability.</p>
-            <p>Men do not possess citizenship status within X-Topia. Their presence within the territory is strictly regulated by the State for reproductive purposes only. They hold no political rights and do not participate in governance or collective decision-making.</p>
-            <p>Above all, X-Topia prioritizes internal harmony and preservation. Collective stability takes precedence over individual impulse. Peace, structural coherence, and continuity form the foundation of its political philosophy.</p>
-            <p>Constitutional modification requires unanimity of the Council of Five, or its legitimate institutional successor. The founding principle, exclusive female citizenship within the city, cannot be repealed.</p>
-            <p>X-Topia may admit female immigrants from outside its territory, but admission is a privilege, not a right. Candidates undergo a rigorous process of selection, evaluation, and integration overseen by the State.</p>
-            <p>Admission requires explicit recognition of X-Topia's absolute sovereignty, acceptance of exclusive female citizenship, adherence to its principles of stability and order, and renunciation of any foreign political allegiance. A probationary period follows entry, during which social, cultural, and ideological integration is assessed.</p>
-            <p>The State retains the authority to revoke admission in cases of non-conformity. Full citizenship is granted only upon complete validation and central approval. X-Topia stands as a deliberately engineered civilization: structured, balanced, sovereign, born from exile, sustained by order, and shaped by Five.</p>
+          <p>X-Topia is a sovereign city-nation, independent from all external authority. Its legitimacy rests upon an act of exile and foundation carried out by the Five Founding Sisters, whose departure from the old world marked the birth of a new civil order.</p>
+          <p>From that founding act emerged a nation structured not by accident, but by deliberate design. At the core of X-Topia stands the enduring symbol of Five. The Five Founding Sisters form the original nucleus of the political order, and their number shapes the very geometry of the city.</p>
+          <p>Five circular districts compose the territorial structure, arranged according to the pattern of the Five. Each district maintains autonomous local administration while remaining aligned under a central authority that preserves national equilibrium.</p>
+          <p>Full citizenship in X-Topia is reserved exclusively for women. Citizenship confers civic rights, political participation, access to resources, and full protection by the State. The city was conceived as a space of female sovereignty, and that principle remains immutable.</p>
+          <p>The economy of X-Topia is designed around quality of life rather than productivity for its own sake. Citizen labor is limited. Automation and robotics perform the majority of industrial and logistical functions. Leisure time is not a luxury but a structural pillar of social balance.</p>
+          <p>The rhythm of life is measured, intentional, and protected. Public surface life is governed by principles of calm, cleanliness, safety, and aesthetic harmony. The visible city reflects internal order. Laws regulate any action that threatens stability or collective coherence.</p>
+          <p>Within this structure, one district is designated as a zone of extended bodily expression, including the freedom of public nudity. The remaining districts maintain clothing standards defined by their local councils. This differentiation reflects a broader philosophy: liberty exists within clearly defined boundaries.</p>
+          <p>X-Topia formally acknowledges the existence of an underground cultural sphere. Social experimentation, private gatherings, and regulated substance use may occur within controlled frameworks. Such parallel expressions are tolerated so long as they do not endanger institutional stability or collective security.</p>
+          <p>Technological systems related to reproduction and biological management are the exclusive property of the State. They are administered solely to ensure demographic continuity and long-term sustainability.</p>
+          <p>Men do not possess citizenship status within X-Topia. Their presence within the territory is strictly regulated by the State for reproductive purposes only. They hold no political rights and do not participate in governance or collective decision-making.</p>
+          <p>Above all, X-Topia prioritizes internal harmony and preservation. Collective stability takes precedence over individual impulse. Peace, structural coherence, and continuity form the foundation of its political philosophy.</p>
+          <p>Constitutional modification requires unanimity of the Council of Five, or its legitimate institutional successor. The founding principle, exclusive female citizenship within the city, cannot be repealed.</p>
+          <p>X-Topia may admit female immigrants from outside its territory, but admission is a privilege, not a right. Candidates undergo a rigorous process of selection, evaluation, and integration overseen by the State.</p>
+          <p>Admission requires explicit recognition of X-Topia's absolute sovereignty, acceptance of exclusive female citizenship, adherence to its principles of stability and order, and renunciation of any foreign political allegiance. A probationary period follows entry, during which social, cultural, and ideological integration is assessed.</p>
+          <p>The State retains the authority to revoke admission in cases of non-conformity. Full citizenship is granted only upon complete validation and central approval. X-Topia stands as a deliberately engineered civilization: structured, balanced, sovereign, born from exile, sustained by order, and shaped by Five.</p>
 
-            <div class="actions">
-              <a class="back" href="index.html">Back To The Frontier Gate</a>
-            </div>
+          <div class="actions">
+            <a class="back" href="index.html">Back To The Frontier Gate</a>
           </div>
-        </section>
-
-        <section class="viewer" id="viewer" aria-live="polite">
-          <iframe
-            id="contentFrame"
-            class="viewer-frame"
-            title="Visitor linked page"
-            loading="lazy"
-            referrerpolicy="no-referrer"
-            scrolling="no"
-          ></iframe>
-        </section>
-            </main>
-
-      <aside class="district-panel" aria-label="District links">
-        <div class="district-links">
-          <a class="district-link" href="arch.html">
-            <img class="district-thumb" src="images/the_frontier_gate_day.png" alt="The Frontier Gate" />
-          </a>
-          <a class="district-link" href="apex.html">
-            <img class="district-thumb" src="images/the_apex_district.png" alt="The Apex District" />
-          </a>
-          <a class="district-link" href="garden.html">
-            <img class="district-thumb" src="images/the_garden_district.png" alt="The Garden District" />
-          </a>
-          <a class="district-link" href="crucible.html">
-            <img class="district-thumb" src="images/the_crucible_district .png" alt="The Crucible District" />
-          </a>
-          <a class="district-link" href="citadel.html">
-            <img class="district-thumb" src="images/the_citadel_district.png" alt="The Citadel District" />
-          </a>
         </div>
-      </aside>
+      </section>
+
+      <section class="viewer" id="viewer" aria-live="polite">
+        <iframe
+          id="contentFrame"
+          class="viewer-frame"
+          title="Visitor linked page"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          scrolling="no"
+        ></iframe>
+      </section>
+    </main>
+      </div>
     </div>
   </div>
   <script>
     (function () {
       const logoLinks = document.querySelectorAll(".logo-link[href]");
+      const card = document.querySelector('.card');
       const body = document.querySelector(".body");
       const declarationContent = document.getElementById("declarationContent");
       const initialEmpty = document.getElementById("initialEmpty");
       const viewer = document.getElementById("viewer");
       const frame = document.getElementById("contentFrame");
 
-      if (!logoLinks.length || !body || !declarationContent || !initialEmpty || !viewer || !frame) {
+      if (!logoLinks.length || !card || !body || !declarationContent || !initialEmpty || !viewer || !frame) {
         return;
       }
 
       initialEmpty.hidden = false;
       declarationContent.hidden = true;
 
+      function openCard() {
+        card.classList.add('is-open');
+      }
+
       function openInViewer(link) {
         const href = link.getAttribute("href");
         if (!href) return;
 
+        openCard();
         frame.src = href;
         body.style.display = "none";
         viewer.classList.add("is-open");
@@ -454,6 +472,7 @@
       }
 
       function showDeclaration() {
+        openCard();
         frame.removeAttribute("src");
         viewer.classList.remove("is-open");
         body.style.display = "";
@@ -468,9 +487,11 @@
           if (link.dataset.view === "declaration") {
             showDeclaration();
             link.classList.add("is-active");
+            link.blur();
             return;
           }
           openInViewer(link);
+          link.blur();
         });
       });
 
