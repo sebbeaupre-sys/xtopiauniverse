@@ -34,7 +34,8 @@
     .page {
       display: grid;
       min-height: 100vh;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto 1fr auto;
+      gap: 22px;
       padding: 18px;
     }
 
@@ -72,7 +73,7 @@
     .map-preview {
       width: 100%;
       min-height: 520px;
-      background-image: url("images/mape_xtopia.png");
+      background-image: url("../images/mape_xtopia.png");
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
@@ -104,6 +105,62 @@
       line-height: 1.6;
     }
 
+    .tourism-gallery {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 0 0 22px;
+    }
+
+    .gallery-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .gallery-card {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(102, 200, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(9, 15, 22, 0.76);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
+    }
+
+    .gallery-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .gallery-card figcaption {
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      min-height: 48px;
+      padding: 10px 11px;
+      color: #d7e6f6;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    .gallery-number {
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    @media (max-width: 1080px) {
+      .gallery-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 820px) {
       .content {
         grid-template-columns: 1fr;
@@ -119,13 +176,23 @@
         border-top: 1px solid rgba(102, 200, 255, 0.34);
         padding: 22px 0 0;
       }
+
+      .gallery-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .gallery-list {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header class="topbar">
-      <a class="back-link" href="visitor.html">Back to Visitor</a>
+      <a class="back-link" href="../visitor.html">Back to Visitor</a>
     </header>
 
     <main class="content">
@@ -136,6 +203,41 @@
         <p>The Bureau of Tourism coordinates visitor access, district orientation, public routes, and authorized points of discovery across X-Topia.</p>
       </section>
     </main>
+
+    <section class="tourism-gallery" aria-label="X-Topia district previews">
+      <ul class="gallery-list">
+        <li>
+          <figure class="gallery-card">
+            <img src="images/1-the_frontier_gate_day.png" alt="The Frontier Gate" />
+            <figcaption><span class="gallery-number">01</span>The Frontier Gate</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="gallery-card">
+            <img src="images/2-the_apex_district.png" alt="The Apex District" />
+            <figcaption><span class="gallery-number">02</span>The Apex District</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="gallery-card">
+            <img src="images/3-the_crucible_district%20.png" alt="The Crucible District" />
+            <figcaption><span class="gallery-number">03</span>The Crucible District</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="gallery-card">
+            <img src="images/4-the_citadel_district.png" alt="The Citadel District" />
+            <figcaption><span class="gallery-number">04</span>The Citadel District</figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure class="gallery-card">
+            <img src="images/5-the_garden_district.png" alt="The Garden District" />
+            <figcaption><span class="gallery-number">05</span>The Garden District</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
   </div>
 </body>
 </html>
