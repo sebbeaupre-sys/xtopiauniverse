@@ -603,7 +603,7 @@
       initialEmpty.hidden = false;
       declarationContent.hidden = true;
 
-      const sponsorAssetVersion = Date.now().toString();
+      const sponsorAssetVersion = "20260603";
       const sponsorManifestPath = "images/sponsors/sponsors.json";
       const sponsorManifestUrl = `${sponsorManifestPath}?v=${sponsorAssetVersion}`;
       const sponsorBaseUrl = "images/sponsors/";
@@ -636,8 +636,12 @@
       function sponsorImageToUrl(item) {
         const filename = typeof item === "string" ? item : item && item.file;
         if (!filename) return "";
-        if (/^(?:https?:|file:|images\/)/i.test(filename)) return filename;
-        return sponsorBaseUrl + filename.split("/").map(encodeURIComponent).join("/");
+        const source = /^(?:https?:|file:|images\/)/i.test(filename)
+          ? filename
+          : sponsorBaseUrl + filename.split("/").map(encodeURIComponent).join("/");
+        return source.includes("?")
+          ? `${source}&v=${sponsorAssetVersion}`
+          : `${source}?v=${sponsorAssetVersion}`;
       }
 
       function normalizeSponsorManifest(data) {
